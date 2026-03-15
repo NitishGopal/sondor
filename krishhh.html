@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SONDER — Slow Living, Thoughtfully Made</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Karla:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --cream:#FAF7F2;
+  --parchment:#F2EDE3;
+  --warm:#E8DFD0;
+  --linen:#D9CFBC;
+  --forest:#2C3D2E;
+  --sage:#5A7A5C;
+  --sage-light:#8FA882;
+  --terra:#B5623A;
+  --terra-light:#D4855A;
+  --charcoal:#1E1E1A;
+  --ink:#2A2520;
+  --text-mid:#5A5248;
+  --text-soft:#8A7E72;
+  --border:#DDD4C4;
+  --border-light:#EDE7DB;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Karla',sans-serif;background:var(--cream);color:var(--ink);overflow-x:hidden;}
+
+/* GRAIN */
+body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.4;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23g)' opacity='0.035'/%3E%3C/svg%3E");}
+
+/* ── ANNOUNCEMENT BAR ── */
+.announce{
+  background:var(--forest);color:rgba(250,247,242,.8);
+  text-align:center;padding:.6rem 1rem;
+  font-size:.72rem;letter-spacing:.12em;
+}
+.announce span{color:var(--sage-light);}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:500;
+  background:rgba(250,247,242,.95);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border-light);
+}
+.nav-inner{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 3rem;max-width:1400px;margin:0 auto;
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.7rem;font-weight:300;letter-spacing:.25em;
+  color:var(--charcoal);text-decoration:none;text-transform:uppercase;
+}
+.nav-links{display:flex;gap:2.5rem;list-style:none;}
+.nav-links a{
+  font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-mid);text-decoration:none;transition:color .25s;position:relative;
+}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;right:0;height:1px;background:var(--terra);transform:scaleX(0);transition:transform .3s;}
+.nav-links a:hover{color:var(--charcoal);}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-right{display:flex;align-items:center;gap:1.2rem;}
+.nav-icon{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--text-mid);font-size:.95rem;
+  transition:all .25s;text-decoration:none;background:transparent;
+}
+.nav-icon:hover{border-color:var(--terra);color:var(--terra);}
+.cart-wrap{position:relative;}
+.cart-badge{
+  position:absolute;top:-4px;right:-4px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--terra);color:#fff;font-size:.55rem;font-weight:600;
+  display:flex;align-items:center;justify-content:center;
+}
+
+/* ── HERO ── */
+.hero{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:calc(100vh - 90px);
+  overflow:hidden;
+}
+.hero-left{
+  position:relative;overflow:hidden;
+}
+.hero-left img{
+  width:100%;height:100%;object-fit:cover;
+  animation:heroZoom 18s ease-out forwards;
+  display:block;
+}
+@keyframes heroZoom{from{transform:scale(1.07);}to{transform:scale(1);}}
+.hero-left-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,rgba(44,61,46,.08),transparent);
+}
+.hero-left-tag{
+  position:absolute;bottom:2.5rem;left:2.5rem;
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1rem;
+  color:rgba(250,247,242,.85);
+  text-shadow:0 2px 12px rgba(0,0,0,.3);
+}
+
+.hero-right{
+  background:var(--parchment);
+  display:flex;flex-direction:column;justify-content:center;
+  padding:5rem 5rem 5rem 5rem;
+  position:relative;
+}
+.hero-eyebrow{
+  font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--sage);margin-bottom:2rem;
+  display:flex;align-items:center;gap:.8rem;
+  opacity:0;animation:fadeUp .8s .2s ease forwards;
+}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--sage);}
+.hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem,4.5vw,5rem);
+  font-weight:300;line-height:1.05;
+  color:var(--charcoal);margin-bottom:2rem;
+  opacity:0;animation:fadeUp .8s .35s ease forwards;
+}
+.hero-h1 em{font-style:italic;color:var(--terra);}
+.hero-sub{
+  font-size:1rem;line-height:1.85;color:var(--text-mid);
+  font-weight:300;max-width:380px;margin-bottom:3rem;
+  opacity:0;animation:fadeUp .8s .5s ease forwards;
+}
+.hero-actions{
+  display:flex;align-items:center;gap:1.2rem;
+  opacity:0;animation:fadeUp .8s .65s ease forwards;
+}
+.btn-primary{
+  padding:.9rem 2.2rem;background:var(--forest);color:var(--cream);
+  border:none;border-radius:0;font-family:'Karla',sans-serif;
+  font-size:.76rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;display:inline-block;
+  transition:all .3s;
+}
+.btn-primary:hover{background:var(--terra);transform:translateY(-2px);}
+.btn-text{
+  font-size:.78rem;letter-spacing:.08em;color:var(--text-mid);
+  text-decoration:none;display:flex;align-items:center;gap:.5rem;
+  transition:gap .25s,color .25s;
+}
+.btn-text:hover{gap:.9rem;color:var(--charcoal);}
+.hero-trust{
+  display:flex;gap:2.5rem;margin-top:4rem;padding-top:2rem;
+  border-top:1px solid var(--border);
+  opacity:0;animation:fadeUp .8s .8s ease forwards;
+}
+.trust-item{
+  font-size:.7rem;letter-spacing:.06em;color:var(--text-soft);
+  display:flex;align-items:center;gap:.5rem;
+}
+.trust-item::before{
+  content:'✓';font-size:.65rem;color:var(--sage);
+  width:18px;height:18px;border-radius:50%;
+  border:1px solid var(--sage);display:flex;align-items:center;
+  justify-content:center;flex-shrink:0;
+}
+
+/* ── MARQUEE ── */
+.marquee{
+  background:var(--forest);padding:.8rem 0;overflow:hidden;
+}
+.marquee-track{
+  display:flex;gap:0;animation:scrollL 25s linear infinite;width:max-content;
+}
+.mitem{
+  display:flex;align-items:center;gap:2rem;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;font-style:italic;
+  color:rgba(250,247,242,.55);flex-shrink:0;padding-right:2rem;
+  letter-spacing:.05em;
+}
+.msep{color:var(--sage-light);font-style:normal;font-size:.6rem;}
+@keyframes scrollL{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+/* ── COLLECTIONS ── */
+.collections{padding:7rem 3rem;background:var(--cream);max-width:1400px;margin:0 auto;}
+.section-label{
+  font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--terra);display:flex;align-items:center;gap:.8rem;
+  margin-bottom:1rem;
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--terra);}
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.5rem,4vw,4rem);
+  font-weight:300;color:var(--charcoal);
+  line-height:1.1;margin-bottom:1rem;
+}
+.section-title em{font-style:italic;color:var(--terra);}
+.section-sub{font-size:.9rem;color:var(--text-soft);line-height:1.8;max-width:420px;}
+
+.collections-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:4rem;
+}
+.view-all{
+  font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--text-soft);text-decoration:none;
+  border-bottom:1px solid var(--border);padding-bottom:2px;
+  transition:color .25s,border-color .25s;
+}
+.view-all:hover{color:var(--terra);border-color:var(--terra);}
+
+.coll-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1.2rem;
+}
+.coll-card{
+  position:relative;overflow:hidden;cursor:pointer;
+  border-radius:2px;
+}
+.coll-card img{
+  width:100%;height:340px;object-fit:cover;display:block;
+  transition:transform .8s ease;
+}
+.coll-card:hover img{transform:scale(1.06);}
+.coll-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,26,22,.7) 0%,transparent 55%);
+  transition:opacity .3s;
+}
+.coll-card:hover .coll-overlay{opacity:.85;}
+.coll-body{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:1.5rem 1.2rem;z-index:2;
+}
+.coll-label{
+  font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:rgba(250,247,242,.6);margin-bottom:.3rem;
+}
+.coll-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:300;color:var(--cream);
+  margin-bottom:.6rem;
+}
+.coll-arrow{
+  font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--sage-light);display:flex;align-items:center;gap:.4rem;
+  transform:translateY(6px);opacity:0;
+  transition:all .3s;
+}
+.coll-card:hover .coll-arrow{opacity:1;transform:translateY(0);}
+
+/* ── PRODUCTS ── */
+.products{
+  padding:7rem 3rem;background:var(--parchment);
+}
+.products-inner{max-width:1400px;margin:0 auto;}
+.products-header{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:5rem;
+}
+.filter-tabs{
+  display:flex;gap:.5rem;
+}
+.filter-tab{
+  padding:.5rem 1.2rem;font-family:'Karla',sans-serif;
+  font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid var(--border);background:transparent;
+  color:var(--text-soft);cursor:pointer;transition:all .25s;
+  border-radius:100px;
+}
+.filter-tab.active,.filter-tab:hover{
+  background:var(--forest);color:var(--cream);border-color:var(--forest);
+}
+
+.prod-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;
+}
+.prod-card{
+  cursor:pointer;
+}
+.prod-img-wrap{
+  position:relative;overflow:hidden;background:var(--warm);
+  margin-bottom:1.2rem;border-radius:2px;
+}
+.prod-img-wrap img{
+  width:100%;height:300px;object-fit:cover;display:block;
+  transition:transform .7s ease;
+}
+.prod-card:hover .prod-img-wrap img{transform:scale(1.06);}
+.prod-badge{
+  position:absolute;top:.8rem;left:.8rem;z-index:2;
+  font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;
+  padding:.28rem .7rem;border-radius:100px;
+}
+.b-new{background:var(--forest);color:var(--cream);}
+.b-sale{background:var(--terra);color:#fff;}
+.b-pop{background:rgba(250,247,242,.92);color:var(--charcoal);}
+.prod-quick{
+  position:absolute;bottom:.8rem;left:0;right:0;
+  display:flex;justify-content:center;
+  transform:translateY(8px);opacity:0;transition:all .3s;
+}
+.prod-card:hover .prod-quick{opacity:1;transform:translateY(0);}
+.quick-btn{
+  background:rgba(250,247,242,.95);color:var(--charcoal);
+  border:none;font-family:'Karla',sans-serif;
+  font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  padding:.6rem 1.4rem;cursor:pointer;
+  backdrop-filter:blur(8px);transition:background .2s;
+}
+.quick-btn:hover{background:#fff;}
+
+.prod-fav{
+  position:absolute;top:.8rem;right:.8rem;z-index:2;
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(250,247,242,.85);border:none;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.85rem;cursor:pointer;color:var(--text-soft);
+  transition:all .25s;opacity:0;
+}
+.prod-card:hover .prod-fav{opacity:1;}
+.prod-fav:hover{color:var(--terra);}
+
+.prod-info{padding:0 .2rem;}
+.prod-brand{
+  font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text-soft);margin-bottom:.3rem;
+}
+.prod-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.15rem;font-weight:400;color:var(--charcoal);
+  margin-bottom:.4rem;line-height:1.3;
+}
+.prod-desc-short{
+  font-size:.78rem;color:var(--text-soft);line-height:1.5;
+  margin-bottom:.8rem;
+}
+.prod-bottom{display:flex;align-items:center;justify-content:space-between;}
+.prod-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.1rem;color:var(--charcoal);
+}
+.prod-price .old{
+  font-size:.9rem;color:var(--text-soft);
+  text-decoration:line-through;margin-right:.4rem;
+}
+.prod-stars{font-size:.72rem;color:var(--terra-light);letter-spacing:.05em;}
+
+/* ── STORY ── */
+.story{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:100vh;
+  overflow:hidden;
+}
+.story-visual{
+  position:relative;overflow:hidden;
+}
+.story-visual img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform 12s ease;
+}
+.story-visual:hover img{transform:scale(1.04);}
+.story-visual-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,transparent 60%,var(--forest));
+}
+.story-pull{
+  position:absolute;bottom:3rem;left:2.5rem;
+  background:rgba(250,247,242,.9);
+  padding:1.5rem 1.8rem;max-width:260px;
+  backdrop-filter:blur(8px);
+}
+.story-pull p{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.1rem;font-weight:300;
+  color:var(--charcoal);line-height:1.6;margin-bottom:.6rem;
+}
+.story-pull cite{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--text-soft);}
+
+.story-content{
+  background:var(--forest);
+  padding:6rem 5rem;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.story-content .section-label{color:var(--sage-light);}
+.story-content .section-label::before{background:var(--sage-light);}
+.story-content .section-title{color:var(--cream);}
+.story-content .section-title em{color:var(--sage-light);}
+
+.story-body{
+  font-size:.95rem;line-height:2;color:rgba(250,247,242,.65);
+  font-weight:300;margin:2rem 0;max-width:440px;
+}
+.story-body p{margin-bottom:1.2rem;}
+
+.story-timeline{
+  display:flex;flex-direction:column;gap:0;
+  margin:2.5rem 0;
+}
+.timeline-item{
+  display:flex;gap:1.5rem;align-items:flex-start;
+  padding:1.5rem 0;
+  border-bottom:1px solid rgba(250,247,242,.08);
+}
+.timeline-item:first-child{padding-top:0;}
+.t-year{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:300;
+  color:var(--sage-light);min-width:55px;line-height:1;
+}
+.t-text{font-size:.84rem;color:rgba(250,247,242,.55);line-height:1.7;}
+.t-text strong{color:rgba(250,247,242,.85);font-weight:400;}
+
+.story-img-pair{
+  display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:2rem;
+}
+.story-img-pair img{
+  width:100%;height:140px;object-fit:cover;display:block;border-radius:2px;
+  opacity:.7;transition:opacity .3s;
+}
+.story-img-pair img:hover{opacity:1;}
+
+/* ── FEATURES BAND ── */
+.features{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  background:var(--cream);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.feat-item{
+  padding:3rem 2rem;text-align:center;
+  border-right:1px solid var(--border);
+  transition:background .3s;
+}
+.feat-item:last-child{border-right:none;}
+.feat-item:hover{background:var(--parchment);}
+.feat-icon{font-size:1.6rem;margin-bottom:1rem;display:block;}
+.feat-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.05rem;font-weight:400;color:var(--charcoal);
+  margin-bottom:.4rem;
+}
+.feat-desc{font-size:.78rem;color:var(--text-soft);line-height:1.6;}
+
+/* ── BESTSELLERS (featured products 2) ── */
+.bestsellers{padding:7rem 3rem;background:var(--warm);}
+.bestsellers-inner{max-width:1400px;margin:0 auto;}
+.best-layout{
+  display:grid;grid-template-columns:1.2fr 1fr 1fr;
+  gap:1.5rem;margin-top:4rem;
+}
+.best-hero-card{
+  position:relative;overflow:hidden;border-radius:2px;
+  cursor:pointer;min-height:580px;
+  background:var(--parchment);
+}
+.best-hero-card img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;display:block;
+  transition:transform .8s ease;
+}
+.best-hero-card:hover img{transform:scale(1.05);}
+.best-hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(26,26,22,.8) 0%,transparent 50%);
+}
+.best-hero-body{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:2.5rem;z-index:2;
+}
+.bhb-tag{
+  font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--sage-light);margin-bottom:.6rem;
+}
+.bhb-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2rem;font-weight:300;color:var(--cream);
+  line-height:1.1;margin-bottom:.8rem;
+}
+.bhb-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem;color:rgba(250,247,242,.7);margin-bottom:1.2rem;
+}
+.bhb-btn{
+  display:inline-block;padding:.75rem 1.8rem;
+  background:rgba(250,247,242,.15);color:var(--cream);
+  border:1px solid rgba(250,247,242,.3);
+  font-family:'Karla',sans-serif;font-size:.72rem;
+  letter-spacing:.1em;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;
+  transition:all .3s;backdrop-filter:blur(4px);
+}
+.bhb-btn:hover{background:var(--cream);color:var(--charcoal);}
+
+.best-side{display:flex;flex-direction:column;gap:1.5rem;}
+.best-side-card{
+  background:var(--parchment);border-radius:2px;
+  overflow:hidden;display:flex;cursor:pointer;
+  border:1px solid var(--border-light);transition:all .3s;
+}
+.best-side-card:hover{transform:translateX(4px);border-color:var(--linen);}
+.bsc-img{
+  width:130px;flex-shrink:0;overflow:hidden;
+  position:relative;background:var(--warm);
+}
+.bsc-img img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .7s ease;
+}
+.best-side-card:hover .bsc-img img{transform:scale(1.08);}
+.bsc-body{padding:1.4rem 1.2rem;display:flex;flex-direction:column;justify-content:center;}
+.bsc-tag{font-size:.6rem;letter-spacing:.14em;text-transform:uppercase;color:var(--sage);margin-bottom:.35rem;}
+.bsc-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--charcoal);margin-bottom:.35rem;}
+.bsc-desc{font-size:.77rem;color:var(--text-soft);line-height:1.5;margin-bottom:.8rem;}
+.bsc-footer{display:flex;align-items:center;justify-content:space-between;}
+.bsc-price{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--terra);}
+.add-small{
+  font-size:.65rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--text-soft);background:none;border:1px solid var(--border);
+  padding:.3rem .7rem;cursor:pointer;font-family:'Karla',sans-serif;
+  transition:all .25s;
+}
+.add-small:hover{background:var(--forest);color:var(--cream);border-color:var(--forest);}
+
+/* ── TESTIMONIALS ── */
+.testimonials{
+  padding:7rem 3rem;background:var(--parchment);
+  overflow:hidden;
+}
+.testi-inner{max-width:1400px;margin:0 auto;}
+.testi-layout{
+  display:grid;grid-template-columns:320px 1fr;
+  gap:6rem;align-items:center;
+  margin-top:4rem;
+}
+.testi-feature{
+  position:relative;
+}
+.testi-feature img{
+  width:100%;height:420px;object-fit:cover;
+  display:block;border-radius:2px;
+}
+.testi-feature-badge{
+  position:absolute;bottom:-1.5rem;right:-1.5rem;
+  background:var(--terra);color:#fff;
+  width:90px;height:90px;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-weight:400;line-height:1;
+  text-align:center;
+}
+.testi-feature-badge span{font-size:.55rem;letter-spacing:.1em;text-transform:uppercase;margin-top:.2rem;}
+
+.testi-cards{
+  display:flex;flex-direction:column;gap:1.5rem;
+}
+.testi-card{
+  background:var(--cream);padding:2rem 2.2rem;
+  border-left:3px solid var(--terra);
+  transition:all .3s;
+}
+.testi-card:hover{transform:translateX(6px);}
+.testi-stars{color:var(--terra-light);font-size:.78rem;letter-spacing:.06em;margin-bottom:.8rem;}
+.testi-text{
+  font-family:'Cormorant Garamond',serif;
+  font-style:italic;font-size:1.1rem;font-weight:300;
+  color:var(--charcoal);line-height:1.65;margin-bottom:1.2rem;
+}
+.testi-author{display:flex;align-items:center;gap:.8rem;}
+.testi-av{
+  width:38px;height:38px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.82rem;font-weight:600;color:#fff;flex-shrink:0;
+}
+.testi-name{font-size:.84rem;font-weight:500;color:var(--charcoal);}
+.testi-note{font-size:.7rem;color:var(--text-soft);}
+.testi-product{
+  display:flex;align-items:center;gap:.4rem;
+  font-size:.68rem;color:var(--sage);letter-spacing:.06em;
+  text-transform:uppercase;margin-top:.5rem;
+}
+.testi-product::before{content:'✓';font-size:.6rem;}
+
+/* ── INSTAGRAM GRID ── */
+.gram{padding:7rem 3rem;background:var(--cream);}
+.gram-inner{max-width:1400px;margin:0 auto;}
+.gram-head{text-align:center;margin-bottom:4rem;}
+.gram-handle{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;font-style:italic;color:var(--terra);
+  display:block;margin-top:.5rem;
+}
+.gram-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:.6rem;
+}
+.gram-item{
+  overflow:hidden;border-radius:2px;
+  position:relative;cursor:pointer;
+  aspect-ratio:1;
+}
+.gram-item img{
+  width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s ease;
+}
+.gram-item:hover img{transform:scale(1.1);}
+.gram-hover{
+  position:absolute;inset:0;
+  background:rgba(44,61,46,.6);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .3s;
+  font-size:1.2rem;color:#fff;
+}
+.gram-item:hover .gram-hover{opacity:1;}
+
+/* ── NEWSLETTER ── */
+.newsletter{
+  display:grid;grid-template-columns:1fr 1fr;
+  min-height:500px;overflow:hidden;
+}
+.nl-visual{position:relative;overflow:hidden;}
+.nl-visual img{
+  width:100%;height:100%;object-fit:cover;display:block;
+}
+.nl-visual-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to right,transparent 50%,var(--forest));
+}
+.nl-content{
+  background:var(--forest);
+  padding:6rem 5rem;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.nl-content .section-label{color:var(--sage-light);}
+.nl-content .section-label::before{background:var(--sage-light);}
+.nl-content .section-title{color:var(--cream);}
+.nl-content .section-title em{color:var(--sage-light);}
+.nl-sub{
+  font-size:.92rem;color:rgba(250,247,242,.6);
+  line-height:1.8;margin:1.5rem 0 2.5rem;max-width:360px;
+}
+.nl-form{display:flex;flex-direction:column;gap:.8rem;max-width:380px;}
+.nl-form input{
+  background:rgba(255,255,255,.07);border:1px solid rgba(250,247,242,.15);
+  color:var(--cream);font-family:'Karla',sans-serif;
+  font-size:.88rem;padding:.9rem 1.2rem;outline:none;
+  transition:border-color .3s;
+}
+.nl-form input::placeholder{color:rgba(250,247,242,.35);}
+.nl-form input:focus{border-color:rgba(250,247,242,.4);}
+.nl-form button{
+  background:var(--terra);color:#fff;border:none;
+  font-family:'Karla',sans-serif;font-size:.76rem;
+  font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  padding:.9rem 2rem;cursor:pointer;transition:background .3s;
+  align-self:flex-start;
+}
+.nl-form button:hover{background:var(--terra-light);}
+.nl-perks{
+  display:flex;flex-direction:column;gap:.6rem;margin-top:2rem;
+}
+.nl-perk{
+  display:flex;align-items:center;gap:.7rem;
+  font-size:.78rem;color:rgba(250,247,242,.45);
+}
+.nl-perk::before{content:'→';color:var(--sage-light);}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--charcoal);
+  padding:5rem 3rem 2.5rem;
+}
+.footer-inner{max-width:1400px;margin:0 auto;}
+.footer-top{
+  display:grid;grid-template-columns:2.2fr 1fr 1fr 1fr 1fr;
+  gap:4rem;padding-bottom:4rem;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  margin-bottom:3rem;
+}
+.f-brand .f-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.6rem;font-weight:300;letter-spacing:.25em;
+  color:var(--cream);display:block;margin-bottom:1.2rem;
+  text-decoration:none;
+}
+.f-brand p{
+  font-size:.82rem;line-height:1.85;
+  color:rgba(250,247,242,.38);max-width:240px;margin-bottom:1.8rem;
+}
+.f-socials{display:flex;gap:.6rem;}
+.f-soc{
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:.68rem;color:rgba(250,247,242,.35);
+  cursor:pointer;transition:all .25s;text-decoration:none;
+}
+.f-soc:hover{border-color:var(--sage-light);color:var(--sage-light);}
+.f-col h4{
+  font-size:.65rem;text-transform:uppercase;letter-spacing:.2em;
+  color:rgba(250,247,242,.45);margin-bottom:1.4rem;
+}
+.f-col ul{list-style:none;}
+.f-col li{margin-bottom:.6rem;}
+.f-col a{
+  font-size:.82rem;color:rgba(250,247,242,.3);
+  text-decoration:none;transition:color .2s;
+}
+.f-col a:hover{color:rgba(250,247,242,.7);}
+.footer-bottom{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.72rem;color:rgba(250,247,242,.18);
+}
+.f-legal{display:flex;gap:1.5rem;}
+.f-legal a{color:rgba(250,247,242,.18);text-decoration:none;transition:color .2s;}
+.f-legal a:hover{color:rgba(250,247,242,.45);}
+.f-payments{display:flex;gap:.5rem;align-items:center;}
+.pay{
+  padding:.2rem .5rem;border:1px solid rgba(255,255,255,.1);
+  font-size:.58rem;color:rgba(250,247,242,.25);letter-spacing:.04em;
+}
+
+/* ── MISC ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(18px);}
+  to{opacity:1;transform:translateY(0);}
+}
+.scroll-reveal{
+  opacity:0;transform:translateY(22px);
+  transition:opacity .9s ease,transform .9s ease;
+}
+.scroll-reveal.visible{opacity:1;transform:translateY(0);}
+
+/* cart sidebar */
+.cart-sidebar{
+  position:fixed;top:0;right:-420px;width:420px;height:100vh;
+  background:var(--cream);z-index:800;
+  box-shadow:-20px 0 60px rgba(0,0,0,.12);
+  transition:right .4s cubic-bezier(.25,.8,.25,1);
+  display:flex;flex-direction:column;
+}
+.cart-sidebar.open{right:0;}
+.cart-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 2rem;border-bottom:1px solid var(--border);
+}
+.cart-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;font-weight:300;letter-spacing:.05em;
+}
+.cart-close{
+  font-size:1.2rem;cursor:pointer;color:var(--text-soft);
+  background:none;border:none;line-height:1;
+  transition:color .2s;
+}
+.cart-close:hover{color:var(--charcoal);}
+.cart-items{flex:1;overflow-y:auto;padding:1.5rem 2rem;}
+.cart-item{
+  display:flex;gap:1rem;padding-bottom:1.5rem;
+  margin-bottom:1.5rem;border-bottom:1px solid var(--border-light);
+}
+.ci-img{
+  width:80px;height:80px;flex-shrink:0;overflow:hidden;border-radius:2px;
+  background:var(--warm);
+}
+.ci-img img{width:100%;height:100%;object-fit:cover;display:block;}
+.ci-info{flex:1;}
+.ci-name{font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:.3rem;}
+.ci-var{font-size:.72rem;color:var(--text-soft);}
+.ci-price{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;color:var(--terra);margin-top:.5rem;
+}
+.ci-qty{
+  display:flex;align-items:center;gap:.5rem;margin-top:.6rem;
+}
+.qty-btn{
+  width:24px;height:24px;border:1px solid var(--border);
+  background:none;cursor:pointer;font-size:.8rem;
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s;
+}
+.qty-btn:hover{background:var(--forest);color:var(--cream);border-color:var(--forest);}
+.qty-num{font-size:.82rem;min-width:24px;text-align:center;}
+.cart-footer{padding:1.5rem 2rem;border-top:1px solid var(--border);}
+.cart-total{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:1rem;
+}
+.ct-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--text-soft);}
+.ct-val{font-family:'Cormorant Garamond',serif;font-size:1.4rem;}
+.checkout-btn{
+  width:100%;padding:1rem;background:var(--forest);color:var(--cream);
+  border:none;font-family:'Karla',sans-serif;
+  font-size:.78rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;transition:background .3s;
+}
+.checkout-btn:hover{background:var(--terra);}
+.cart-note{font-size:.7rem;color:var(--text-soft);text-align:center;margin-top:.8rem;}
+
+.cart-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.4);
+  z-index:700;opacity:0;pointer-events:none;
+  transition:opacity .4s;
+}
+.cart-overlay.active{opacity:1;pointer-events:all;}
+
+/* toast */
+.toast{
+  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);
+  background:var(--forest);color:var(--cream);
+  padding:.8rem 1.8rem;font-size:.78rem;letter-spacing:.06em;
+  z-index:900;opacity:0;transition:all .35s;pointer-events:none;
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+</style>
+</head>
+<body>
+
+<!-- CART OVERLAY -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+
+<!-- CART SIDEBAR -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <span class="cart-title">Your Basket</span>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <!-- filled by JS -->
+  </div>
+  <div class="cart-footer">
+    <div class="cart-total">
+      <span class="ct-label">Subtotal</span>
+      <span class="ct-val" id="cartTotal">₹0</span>
+    </div>
+    <button class="checkout-btn" onclick="showToast('Redirecting to checkout…')">Proceed to Checkout</button>
+    <p class="cart-note">Free shipping on orders above ₹1,500 · Easy returns</p>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announce">
+  Free shipping on orders over ₹1,500 &nbsp;·&nbsp; <span>Use code SONDER10 for 10% off your first order</span> &nbsp;·&nbsp; Ethically made, slow shipped
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">SONDER</a>
+    <ul class="nav-links">
+      <li><a href="#collections">Shop</a></li>
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#bestsellers">Bestsellers</a></li>
+      <li><a href="#gram">Journal</a></li>
+      <li><a href="#newsletter">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="#" class="nav-icon" title="Search">🔍</a>
+      <a href="#" class="nav-icon" title="Wishlist">♡</a>
+      <div class="cart-wrap">
+        <a href="#" class="nav-icon" title="Cart" onclick="openCart();return false;">🛍</a>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <img referrerpolicy="no-referrer"
+      src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1200&q=85"
+      alt="Cozy home interior with warm morning light"/>
+    <div class="hero-left-overlay"></div>
+    <div class="hero-left-tag">"A home that feels like a hug."</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-eyebrow">New Collection — Autumn 2025</div>
+    <h1 class="hero-h1">Made for the<br/>art of <em>slowing<br/>down.</em></h1>
+    <p class="hero-sub">Artisan coffee, handmade ceramics, soy candles, and curated home goods — crafted for people who believe the small moments are the whole story.</p>
+    <div class="hero-actions">
+      <a href="#collections" class="btn-primary">Shop the Collection</a>
+      <a href="#story" class="btn-text">Read our story →</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">Ethically Sourced</div>
+      <div class="trust-item">Handcrafted</div>
+      <div class="trust-item">Carbon Neutral</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-track">
+    <span class="mitem">Artisan Coffee <span class="msep">◆</span></span>
+    <span class="mitem">Handmade Ceramics <span class="msep">◆</span></span>
+    <span class="mitem">Soy Candles <span class="msep">◆</span></span>
+    <span class="mitem">Linen Textiles <span class="msep">◆</span></span>
+    <span class="mitem">Slow Living <span class="msep">◆</span></span>
+    <span class="mitem">Ethical Trade <span class="msep">◆</span></span>
+    <span class="mitem">Small Batch <span class="msep">◆</span></span>
+    <span class="mitem">Artisan Coffee <span class="msep">◆</span></span>
+    <span class="mitem">Handmade Ceramics <span class="msep">◆</span></span>
+    <span class="mitem">Soy Candles <span class="msep">◆</span></span>
+    <span class="mitem">Linen Textiles <span class="msep">◆</span></span>
+    <span class="mitem">Slow Living <span class="msep">◆</span></span>
+    <span class="mitem">Ethical Trade <span class="msep">◆</span></span>
+    <span class="mitem">Small Batch <span class="msep">◆</span></span>
+  </div>
+</div>
+
+<!-- COLLECTIONS -->
+<section class="collections scroll-reveal" id="collections">
+  <div class="collections-header">
+    <div>
+      <div class="section-label">Shop by Category</div>
+      <h2 class="section-title">Browse our <em>collections</em></h2>
+    </div>
+    <a href="#" class="view-all">View All Collections →</a>
+  </div>
+  <div class="coll-grid">
+    <div class="coll-card">
+      <img referrerpolicy="no-referrer"
+        src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80"
+        alt="Specialty coffee"/>
+      <div class="coll-overlay"></div>
+      <div class="coll-body">
+        <div class="coll-label">12 products</div>
+        <div class="coll-name">Specialty Coffee</div>
+        <div class="coll-arrow">Explore <span>→</span></div>
+      </div>
+    </div>
+    <div class="coll-card">
+      <img referrerpolicy="no-referrer"
+        src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=600&q=80"
+        alt="Handmade ceramics"/>
+      <div class="coll-overlay"></div>
+      <div class="coll-body">
+        <div class="coll-label">8 products</div>
+        <div class="coll-name">Ceramics</div>
+        <div class="coll-arrow">Explore <span>→</span></div>
+      </div>
+    </div>
+    <div class="coll-card">
+      <img referrerpolicy="no-referrer"
+        src="https://images.unsplash.com/photo-1608181831718-c9e9b0cebb68?auto=format&fit=crop&w=600&q=80"
+        alt="Soy candles"/>
+      <div class="coll-overlay"></div>
+      <div class="coll-body">
+        <div class="coll-label">6 products</div>
+        <div class="coll-name">Candles & Scents</div>
+        <div class="coll-arrow">Explore <span>→</span></div>
+      </div>
+    </div>
+    <div class="coll-card">
+      <img referrerpolicy="no-referrer"
+        src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=600&q=80"
+        alt="Linen textiles"/>
+      <div class="coll-overlay"></div>
+      <div class="coll-body">
+        <div class="coll-label">10 products</div>
+        <div class="coll-name">Linen & Textiles</div>
+        <div class="coll-arrow">Explore <span>→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products scroll-reveal">
+  <div class="products-inner">
+    <div class="products-header">
+      <div>
+        <div class="section-label">New Arrivals</div>
+        <h2 class="section-title">Things we <em>love</em></h2>
+      </div>
+      <div class="filter-tabs">
+        <button class="filter-tab active" onclick="filterProducts(this,'all')">All</button>
+        <button class="filter-tab" onclick="filterProducts(this,'coffee')">Coffee</button>
+        <button class="filter-tab" onclick="filterProducts(this,'ceramics')">Ceramics</button>
+        <button class="filter-tab" onclick="filterProducts(this,'home')">Home</button>
+      </div>
+    </div>
+    <div class="prod-grid" id="prodGrid">
+
+      <div class="prod-card" data-cat="coffee">
+        <div class="prod-img-wrap">
+          <img referrerpolicy="no-referrer"
+            src="https://images.unsplash.com/photo-1464979681340-bdd28a61699e?auto=format&fit=crop&w=500&q=80"
+            alt="Single origin coffee beans"/>
+          <span class="prod-badge b-new">New</span>
+          <button class="prod-fav" onclick="toggleFav(this)">♡</button>
+          <div class="prod-quick"><button class="quick-btn" onclick="addToCart('Ethiopia Yirgacheffe',990,this)">Add to Basket</button></div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-brand">Single Origin</div>
+          <div class="prod-name">Ethiopia Yirgacheffe — 250g</div>
+          <div class="prod-desc-short">Floral & bright. Jasmine, peach, lemon. Washed process.</div>
+          <div class="prod-bottom">
+            <div class="prod-price">₹990</div>
+            <div class="prod-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="ceramics">
+        <div class="prod-img-wrap">
+          <img referrerpolicy="no-referrer"
+            src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?auto=format&fit=crop&w=500&q=80"
+            alt="Handmade ceramic mug"/>
+          <span class="prod-badge b-pop">★ Best Seller</span>
+          <button class="prod-fav" onclick="toggleFav(this)">♡</button>
+          <div class="prod-quick"><button class="quick-btn" onclick="addToCart('Wabi Mug — Moss',1,490,this)">Add to Basket</button></div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-brand">Handmade Ceramics</div>
+          <div class="prod-name">Wabi Mug — Moss Green</div>
+          <div class="prod-desc-short">Wheel-thrown stoneware. Each one unique. Dishwasher safe.</div>
+          <div class="prod-bottom">
+            <div class="prod-price">₹1,490</div>
+            <div class="prod-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="home">
+        <div class="prod-img-wrap">
+          <img referrerpolicy="no-referrer"
+            src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=500&q=80"
+            alt="Soy wax candle"/>
+          <span class="prod-badge b-new">New</span>
+          <button class="prod-fav" onclick="toggleFav(this)">♡</button>
+          <div class="prod-quick"><button class="quick-btn" onclick="addToCart('Forest & Rain Candle',850,this)">Add to Basket</button></div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-brand">Soy Candles</div>
+          <div class="prod-name">Forest & Rain — 200g</div>
+          <div class="prod-desc-short">Oakmoss, petrichor, white cedar. 45-hour burn time.</div>
+          <div class="prod-bottom">
+            <div class="prod-price">₹850</div>
+            <div class="prod-stars">★★★★☆</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="coffee">
+        <div class="prod-img-wrap">
+          <img referrerpolicy="no-referrer"
+            src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=500&q=80"
+            alt="Coffee and pastry"/>
+          <span class="prod-badge b-sale">Save 15%</span>
+          <button class="prod-fav" onclick="toggleFav(this)">♡</button>
+          <div class="prod-quick"><button class="quick-btn" onclick="addToCart('Morning Ritual Bundle',1,999,this)">Add to Basket</button></div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-brand">Bundle</div>
+          <div class="prod-name">Morning Ritual Bundle</div>
+          <div class="prod-desc-short">2 blends + 1 mug + 1 candle. Everything you need.</div>
+          <div class="prod-bottom">
+            <div class="prod-price"><span class="old">₹3,500</span>₹2,999</div>
+            <div class="prod-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="ceramics">
+        <div class="prod-img-wrap">
+          <img referrerpolicy="no-referrer"
+            src="https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?auto=format&fit=crop&w=500&q=80"
+            alt="Ceramic pour over set"/>
+          <button class="prod-fav" onclick="toggleFav(this)">♡</button>
+          <div class="prod-quick"><button class="quick-btn" onclick="addToCart('Ceramic Pour Over Set',2,490,this)">Add to Basket</button></div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-brand">Handmade Ceramics</div>
+          <div class="prod-name">Ceramic Pour Over Set</div>
+          <div class="prod-desc-short">Dripper + carafe in speckled white clay. Set of 2.</div>
+          <div class="prod-bottom">
+            <div class="prod-price">₹2,490</div>
+            <div class="prod-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="home">
+        <div class="prod-img-wrap">
+          <img referrerpolicy="no-referrer"
+            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=500&q=80"
+            alt="Linen throw blanket"/>
+          <span class="prod-badge b-pop">★ Editor's Pick</span>
+          <button class="prod-fav" onclick="toggleFav(this)">♡</button>
+          <div class="prod-quick"><button class="quick-btn" onclick="addToCart('Oatmeal Linen Throw',2,200,this)">Add to Basket</button></div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-brand">Linen & Textiles</div>
+          <div class="prod-name">Oatmeal Linen Throw</div>
+          <div class="prod-desc-short">Portuguese stonewashed linen. 130×170cm. Gets softer with every wash.</div>
+          <div class="prod-bottom">
+            <div class="prod-price">₹2,200</div>
+            <div class="prod-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="coffee">
+        <div class="prod-img-wrap">
+          <img referrerpolicy="no-referrer"
+            src="https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=500&q=80"
+            alt="Cold brew concentrate"/>
+          <button class="prod-fav" onclick="toggleFav(this)">♡</button>
+          <div class="prod-quick"><button class="quick-btn" onclick="addToCart('Cold Brew Concentrate',750,this)">Add to Basket</button></div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-brand">Ready to Drink</div>
+          <div class="prod-name">Cold Brew Concentrate — 500ml</div>
+          <div class="prod-desc-short">18-hour steeped. Dilute 1:1. Smooth, never bitter.</div>
+          <div class="prod-bottom">
+            <div class="prod-price">₹750</div>
+            <div class="prod-stars">★★★★☆</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prod-card" data-cat="home">
+        <div class="prod-img-wrap">
+          <img referrerpolicy="no-referrer"
+            src="https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=500&q=80"
+            alt="Incense and brass holder"/>
+          <span class="prod-badge b-new">New</span>
+          <button class="prod-fav" onclick="toggleFav(this)">♡</button>
+          <div class="prod-quick"><button class="quick-btn" onclick="addToCart('Brass Incense Set',1,200,this)">Add to Basket</button></div>
+        </div>
+        <div class="prod-info">
+          <div class="prod-brand">Scent & Ritual</div>
+          <div class="prod-name">Brass Incense + Holder Set</div>
+          <div class="prod-desc-short">Hand-poured incense sticks. Sandalwood, hinoki, amber.</div>
+          <div class="prod-bottom">
+            <div class="prod-price">₹1,200</div>
+            <div class="prod-stars">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story scroll-reveal" id="story">
+  <div class="story-visual">
+    <img referrerpolicy="no-referrer"
+      src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1000&q=85"
+      alt="Founders at home working"/>
+    <div class="story-visual-overlay"></div>
+    <div class="story-pull">
+      <p>"We started SONDER because we missed the feeling of slowing down."</p>
+      <cite>— Meera & Arjun, Founders</cite>
+    </div>
+  </div>
+  <div class="story-content">
+    <div class="section-label">Our Story</div>
+    <h2 class="section-title">Born from<br/><em>a quiet Sunday.</em></h2>
+    <div class="story-body">
+      <p>SONDER started on a rainy Sunday in a Bangalore apartment. Meera had just quit her corporate job. Arjun had been sourcing coffee from small farms in Coorg for years, unable to find a home for it that felt right.</p>
+      <p>They sat together that morning with two mismatched mugs, a candle, and a stack of ceramics Meera had been making on weekends. And something clicked — not a business plan, but a feeling. That the best moments in life are the quiet ones. The unhurried ones.</p>
+      <p>SONDER is that feeling made tangible. Every product we carry is chosen for one reason: it makes ordinary moments feel extraordinary.</p>
+    </div>
+
+    <div class="story-timeline">
+      <div class="timeline-item">
+        <div class="t-year">2019</div>
+        <div class="t-text"><strong>The first bag of beans.</strong> Arjun drives to Coorg and brings back 20kg of washed Robusta. Sells it in handwritten brown paper bags to friends.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-year">2021</div>
+        <div class="t-text"><strong>The ceramics join.</strong> Meera starts wheel-throwing mugs in the kitchen. The first batch sells out in 3 hours on Instagram.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-year">2023</div>
+        <div class="t-text"><strong>SONDER launches.</strong> A proper store, a real team of 6, and a commitment to ethical sourcing across every product line.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="t-year">2025</div>
+        <div class="t-text"><strong>Today.</strong> 40,000 orders, 12 farm partners, carbon neutral shipping, and still the same two mismatched mugs on the kitchen shelf.</div>
+      </div>
+    </div>
+
+    <div class="story-img-pair">
+      <img referrerpolicy="no-referrer"
+        src="https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=400&q=80"
+        alt="Coffee farm"/>
+      <img referrerpolicy="no-referrer"
+        src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=400&q=80"
+        alt="Ceramics being made"/>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES BAND -->
+<div class="features scroll-reveal">
+  <div class="feat-item">
+    <span class="feat-icon">🌿</span>
+    <div class="feat-title">Ethically Sourced</div>
+    <p class="feat-desc">Every product traces back to a real maker or farm. We visit them. We pay them fairly.</p>
+  </div>
+  <div class="feat-item">
+    <span class="feat-icon">📦</span>
+    <div class="feat-title">Plastic-Free Packaging</div>
+    <p class="feat-desc">100% compostable packaging. Recycled mailers. No bubble wrap — ever.</p>
+  </div>
+  <div class="feat-item">
+    <span class="feat-icon">↩</span>
+    <div class="feat-title">Hassle-Free Returns</div>
+    <p class="feat-desc">Not happy? Return within 30 days, no questions asked. We'll even cover the shipping.</p>
+  </div>
+  <div class="feat-item">
+    <span class="feat-icon">☕</span>
+    <div class="feat-title">Small Batch Always</div>
+    <p class="feat-desc">We limit quantities intentionally. Better to sell out than to compromise on quality.</p>
+  </div>
+</div>
+
+<!-- BESTSELLERS -->
+<section class="bestsellers scroll-reveal" id="bestsellers">
+  <div class="bestsellers-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:4rem;">
+      <div>
+        <div class="section-label">Most Loved</div>
+        <h2 class="section-title">This season's <em>favourites</em></h2>
+      </div>
+      <a href="#" class="view-all">All Products →</a>
+    </div>
+    <div class="best-layout">
+
+      <div class="best-hero-card">
+        <img referrerpolicy="no-referrer"
+          src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=800&q=85"
+          alt="Morning ritual setup with coffee and ceramics"/>
+        <div class="best-hero-overlay"></div>
+        <div class="best-hero-body">
+          <div class="bhb-tag">★ Most Gifted · 2025</div>
+          <div class="bhb-name">The Morning<br/>Ritual Gift Set</div>
+          <div class="bhb-price">₹3,499</div>
+          <a href="#" class="bhb-btn" onclick="addToCart('Morning Ritual Gift Set',3499,event.target);return false;">Add to Basket</a>
+        </div>
+      </div>
+
+      <div class="best-side">
+        <div class="best-side-card">
+          <div class="bsc-img">
+            <img referrerpolicy="no-referrer"
+              src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=300&q=80"
+              alt="Moka pot on stove"/>
+          </div>
+          <div class="bsc-body">
+            <div class="bsc-tag">Coffee Gear</div>
+            <div class="bsc-name">Italian Moka Pot — 3 Cup</div>
+            <div class="bsc-desc">Classic stovetop espresso. Stainless steel, induction compatible.</div>
+            <div class="bsc-footer">
+              <div class="bsc-price">₹1,800</div>
+              <button class="add-small" onclick="addToCart('Italian Moka Pot',1800,this)">+ Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="best-side-card">
+          <div class="bsc-img">
+            <img referrerpolicy="no-referrer"
+              src="https://images.unsplash.com/photo-1527156231393-7023794f363c?auto=format&fit=crop&w=300&q=80"
+              alt="Cozy linen cushion covers"/>
+          </div>
+          <div class="bsc-body">
+            <div class="bsc-tag">Linen & Textiles</div>
+            <div class="bsc-name">Stonewashed Cushion Set — 2pc</div>
+            <div class="bsc-desc">45×45cm. Sage green. Removable covers. Portuguese linen.</div>
+            <div class="bsc-footer">
+              <div class="bsc-price">₹1,650</div>
+              <button class="add-small" onclick="addToCart('Stonewashed Cushion Set',1650,this)">+ Add</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="best-side-card">
+          <div class="bsc-img">
+            <img referrerpolicy="no-referrer"
+              src="https://images.unsplash.com/photo-1548445929-4f60a497f851?auto=format&fit=crop&w=300&q=80"
+              alt="Dried flowers arrangement"/>
+          </div>
+          <div class="bsc-body">
+            <div class="bsc-tag">Home & Décor</div>
+            <div class="bsc-name">Dried Pampas Bunch</div>
+            <div class="bsc-desc">Naturally dried. 60cm stems. No watering needed — ever.</div>
+            <div class="bsc-footer">
+              <div class="bsc-price">₹890</div>
+              <button class="add-small" onclick="addToCart('Dried Pampas Bunch',890,this)">+ Add</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials scroll-reveal">
+  <div class="testi-inner">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:0;">
+      <div>
+        <div class="section-label">Customer Love</div>
+        <h2 class="section-title">40,000 happy <em>homes</em></h2>
+      </div>
+      <a href="#" class="view-all">All Reviews →</a>
+    </div>
+    <div class="testi-layout">
+      <div class="testi-feature">
+        <img referrerpolicy="no-referrer"
+          src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=600&q=80"
+          alt="Happy customer at home"/>
+        <div class="testi-feature-badge">4.9<span>avg rating</span></div>
+      </div>
+
+      <div class="testi-cards">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"The Wabi Mug has become the most important object in my morning. There's something deeply comforting about holding something made by real hands."</div>
+          <div class="testi-author">
+            <div class="testi-av" style="background:var(--sage);">P</div>
+            <div>
+              <div class="testi-name">Priya Nair</div>
+              <div class="testi-note">Bangalore · Verified Purchase</div>
+              <div class="testi-product">Wabi Mug — Moss Green</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"I ordered the Morning Ritual Bundle as a gift and it made my friend cry — in the best way. SONDER gets it. It's not just products, it's a whole feeling."</div>
+          <div class="testi-author">
+            <div class="testi-av" style="background:var(--terra);">R</div>
+            <div>
+              <div class="testi-name">Rohan Mehta</div>
+              <div class="testi-note">Mumbai · Verified Purchase</div>
+              <div class="testi-product">Morning Ritual Bundle</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <div class="testi-text">"The Ethiopia Yirgacheffe is unlike any coffee I've had. It smells like flowers and tastes like a very good conversation. I've ordered it four times now."</div>
+          <div class="testi-author">
+            <div class="testi-av" style="background:var(--forest);">A</div>
+            <div>
+              <div class="testi-name">Ananya Sharma</div>
+              <div class="testi-note">Pune · Verified Purchase</div>
+              <div class="testi-product">Ethiopia Yirgacheffe</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM GRID -->
+<section class="gram scroll-reveal" id="gram">
+  <div class="gram-inner">
+    <div class="gram-head">
+      <div class="section-label" style="justify-content:center;">Life at SONDER</div>
+      <h2 class="section-title" style="text-align:center;">Cozy moments from <em>our community</em></h2>
+      <span class="gram-handle">@sonder.home</span>
+    </div>
+    <div class="gram-grid">
+      <div class="gram-item"><img referrerpolicy="no-referrer" src="https://images.unsplash.com/photo-1587049352846-4a222e784d38?auto=format&fit=crop&w=400&q=80" alt="cozy morning"/><div class="gram-hover">♡</div></div>
+      <div class="gram-item"><img referrerpolicy="no-referrer" src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=400&q=80" alt="latte art"/><div class="gram-hover">♡</div></div>
+      <div class="gram-item"><img referrerpolicy="no-referrer" src="https://images.unsplash.com/photo-1608181831718-c9e9b0cebb68?auto=format&fit=crop&w=400&q=80" alt="candle"/><div class="gram-hover">♡</div></div>
+      <div class="gram-item"><img referrerpolicy="no-referrer" src="https://images.unsplash.com/photo-1484723091739-30990ff50f39?auto=format&fit=crop&w=400&q=80" alt="food"/><div class="gram-hover">♡</div></div>
+      <div class="gram-item"><img referrerpolicy="no-referrer" src="https://images.unsplash.com/photo-1490312278390-ab64016e0aa9?auto=format&fit=crop&w=400&q=80" alt="ceramic mug"/><div class="gram-hover">♡</div></div>
+      <div class="gram-item"><img referrerpolicy="no-referrer" src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=400&q=80" alt="café corner"/><div class="gram-hover">♡</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter scroll-reveal" id="newsletter">
+  <div class="nl-visual">
+    <img referrerpolicy="no-referrer"
+      src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=900&q=80"
+      alt="Cozy home corner with books"/>
+    <div class="nl-visual-overlay"></div>
+  </div>
+  <div class="nl-content">
+    <div class="section-label">Stay in touch</div>
+    <h2 class="section-title">Letters from<br/><em>slow living.</em></h2>
+    <p class="nl-sub">New arrivals, stories from our farms and makers, quiet rituals for the week ahead — once a fortnight, always worth reading.</p>
+    <div class="nl-form">
+      <input type="text" placeholder="Your first name"/>
+      <input type="email" placeholder="Your email address"/>
+      <button onclick="showToast('Welcome to the community! ☕')">Subscribe to Letters</button>
+    </div>
+    <div class="nl-perks">
+      <div class="nl-perk">10% off your first order, sent immediately</div>
+      <div class="nl-perk">Early access to new collections</div>
+      <div class="nl-perk">Stories from our farms & makers</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="f-brand">
+        <a href="#" class="f-logo">SONDER</a>
+        <p>Slow living, thoughtfully made. We curate artisan coffee, handmade ceramics, soy candles and home goods for people who believe the quiet moments are everything.</p>
+        <div class="f-socials">
+          <a href="#" class="f-soc">ig</a>
+          <a href="#" class="f-soc">fb</a>
+          <a href="#" class="f-soc">pi</a>
+          <a href="#" class="f-soc">yt</a>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Shop</h4>
+        <ul>
+          <li><a href="#">All Products</a></li>
+          <li><a href="#">Coffee</a></li>
+          <li><a href="#">Ceramics</a></li>
+          <li><a href="#">Candles</a></li>
+          <li><a href="#">Textiles</a></li>
+          <li><a href="#">Gift Sets</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>The Brand</h4>
+        <ul>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Our Makers</a></li>
+          <li><a href="#">Farm Partners</a></li>
+          <li><a href="#">Sustainability</a></li>
+          <li><a href="#">Journal</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Help</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Track Order</a></li>
+          <li><a href="#">Wholesale</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="#">hello@sonder.home</a></li>
+          <li><a href="#">+91 98765 43210</a></li>
+          <li style="margin-top:.8rem;"><a href="#">Mon–Fri, 10am–6pm IST</a></li>
+          <li style="margin-top:.8rem;color:rgba(250,247,242,.3);font-size:.78rem;">Bangalore, India</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 SONDER Slow Living Pvt. Ltd. All rights reserved.</span>
+      <div class="f-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Accessibility</a>
+      </div>
+      <div class="f-payments">
+        <span class="pay">VISA</span>
+        <span class="pay">MC</span>
+        <span class="pay">UPI</span>
+        <span class="pay">AMEX</span>
+        <span class="pay">PayPal</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if(e.isIntersecting) e.target.classList.add('visible');
+}), {threshold:.06});
+document.querySelectorAll('.scroll-reveal').forEach(el => obs.observe(el));
+
+// ── CART STATE ──
+let cart = [];
+
+function addToCart(name, price, el) {
+  if(typeof price === 'object'){price=el;el=null;} // handle event passed
+  if(el && el.target) el = el.target;
+  const existing = cart.find(i => i.name === name);
+  if(existing) existing.qty++;
+  else cart.push({name, price: parseInt(String(price).replace(/,/g,'')), qty:1,
+    img: el ? el.closest('.prod-card, .best-side-card, .best-hero-card')
+              ?.querySelector('img')?.src || '' : ''});
+  updateCart();
+  showToast('Added to basket ☕');
+}
+
+function updateCart() {
+  const badge = document.getElementById('cartBadge');
+  const total = cart.reduce((s,i) => s + i.price*i.qty, 0);
+  const qty = cart.reduce((s,i) => s + i.qty, 0);
+  badge.textContent = qty;
+  document.getElementById('cartTotal').textContent = '₹'+total.toLocaleString('en-IN');
+
+  const el = document.getElementById('cartItems');
+  if(!cart.length){
+    el.innerHTML = '<div style="text-align:center;padding:3rem 1rem;color:var(--text-soft);font-size:.9rem;font-family:\'Cormorant Garamond\',serif;font-style:italic;">Your basket is empty.<br/>Add something beautiful.</div>';
+    return;
+  }
+  el.innerHTML = cart.map((item,i) => `
+    <div class="cart-item">
+      <div class="ci-img"><div style="width:80px;height:80px;background:var(--warm);display:flex;align-items:center;justify-content:center;font-size:1.5rem;">☕</div></div>
+      <div class="ci-info">
+        <div class="ci-name">${item.name}</div>
+        <div class="ci-price">₹${(item.price*item.qty).toLocaleString('en-IN')}</div>
+        <div class="ci-qty">
+          <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+          <span class="qty-num">${item.qty}</span>
+          <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function changeQty(i, d) {
+  cart[i].qty += d;
+  if(cart[i].qty <= 0) cart.splice(i,1);
+  updateCart();
+}
+
+function openCart(){
+  document.getElementById('cartSidebar').classList.add('open');
+  document.getElementById('cartOverlay').classList.add('active');
+}
+function closeCart(){
+  document.getElementById('cartSidebar').classList.remove('open');
+  document.getElementById('cartOverlay').classList.remove('active');
+}
+
+// ── TOAST ──
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// ── WISHLIST ──
+function toggleFav(btn) {
+  btn.textContent = btn.textContent === '♡' ? '♥' : '♡';
+  btn.style.color = btn.textContent === '♥' ? 'var(--terra)' : '';
+  if(btn.textContent === '♥') showToast('Saved to Wishlist ♥');
+}
+
+// ── FILTER TABS ──
+function filterProducts(btn, cat) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.prod-card').forEach(card => {
+    if(cat === 'all' || card.dataset.cat === cat){
+      card.style.display = '';
+      card.style.animation = 'fadeUp .5s ease forwards';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// Init cart display
+updateCart();
+</script>
+</body>
+</html>
